@@ -1,6 +1,21 @@
-var http = require('http');
+var express = require('express');
+var app = express();
 
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World! welcome to nodejs');
-}).listen(8080);
+app.get('/', function (req, res) {
+   res.send('Welcome to express server');
+})
+
+app.get('/ab', function (req, res) {
+  res.send('Hello World');
+})
+
+app.get('/:id', function (req, res) {
+  const {id} = req.params;
+  res.send(`Hello World with param: ${id}`);
+})
+
+var server = app.listen(8080, function () {
+   var host = server.address().address
+   var port = server.address().port   
+   console.log("Example app listening at http://%s:%s", host, port)
+})
